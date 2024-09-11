@@ -48,7 +48,7 @@ const RegisterScreen = () => {
         phoneNumber: fullNumber,
         password,
       });
-      console.log(response);
+    
       navigateTo("Verify", response);
     } catch (error) {}
   };

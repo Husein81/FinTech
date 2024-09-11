@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 import { Colors } from "@/app/theme/Colors";
 
 export const defaultStyles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.background,

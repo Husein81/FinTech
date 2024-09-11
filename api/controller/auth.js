@@ -2,7 +2,7 @@ import twilio from "twilio";
 import { User } from "../models/user.js";
 import dotenv from "dotenv";
 import { generateToken } from "../utils/generateToken.js";
-
+import bcryptjs from "bcryptjs";
 dotenv.config();
 
 const client = twilio(
@@ -75,12 +75,14 @@ export const login = async (req, res) => {
     if (!user.isVerified) {
       return res.status(400).json({ message: "User is not verified" });
     }
+
     const isMatch = await bcryptjs.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
     generateToken(res, user._id);
-    res.status(200).json({ message: "User logged in successfully" });
+    const { password: _, ...rest } = user.toObject();
+    res.status(200).json(rest);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

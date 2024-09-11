@@ -16,24 +16,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadUser } from "@/app/redux/slice/authSlice";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/app/theme/Colors";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { user } = useSelector((state: RootState) => state.auth);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadUser() as never);
+    dispatch(loadUser() as any);
   }, []);
-  console.log("user", user);
+
   const BottomTab = () => {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: Colors.primary,
+          tabBarStyle: {
+            height: 60,
+            borderTopRightRadius: 25,
+            borderTopLeftRadius: 25,
+            shadowOffset: { width: 0, height: 2 },
+            elevation: 4,
+            shadowColor: "#000",
+          },
+        }}
+      >
         <Tab.Screen
           name="Home"
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
+            tabBarIcon: ({ color, focused }) => (
+              <Ionicons name="home" size={30} color={color} />
             ),
             headerShown: false,
           }}
@@ -42,9 +56,10 @@ const StackNavigator = () => {
         <Tab.Screen
           name="Invest"
           options={{
-            tabBarIcon: ({ color, size, focused }) => (
-              <Ionicons name="trending-up" size={size} color={color} />
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="trending-up" size={30} color={color} />
             ),
+
             headerShown: false,
           }}
           component={InvestScreen}
@@ -52,12 +67,9 @@ const StackNavigator = () => {
         <Tab.Screen
           name="Transfers"
           options={{
-            tabBarIcon: ({ color, size, focused }) =>
-              focused ? (
-                <Ionicons name="swap-horizontal" size={size} color={color} />
-              ) : (
-                <Ionicons name="swap-horizontal" size={size} color={color} />
-              ),
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="swap-horizontal" size={30} color={color} />
+            ),
             headerShown: false,
           }}
           component={TransfersScreen}
@@ -65,8 +77,8 @@ const StackNavigator = () => {
         <Tab.Screen
           name="Crypto"
           options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="logo-bitcoin" size={size} color={color} />
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="logo-bitcoin" size={30} color={color} />
             ),
             headerShown: false,
           }}

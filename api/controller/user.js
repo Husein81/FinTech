@@ -3,7 +3,7 @@ import { User } from "../models/user.js";
 export const getUser = async (req, res) => {
   try {
     // Use req.params.id assuming the URL pattern is like /user/:id
-    const user = await User.findById(req.params.id);
+    const user = await User.findById1(req.params.id);
 
     // Check if user exists
     if (!user) {

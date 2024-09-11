@@ -1,6 +1,7 @@
 import {
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
@@ -13,6 +14,8 @@ import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { authRepository } from "../api/repositories/auth";
 import { useDispatch } from "react-redux";
+import { loginActionUser } from "../redux/slice/authSlice";
+import { useNavigation } from "@react-navigation/native";
 
 enum SubmitType {
   PHONE,
@@ -32,6 +35,13 @@ const LoginScreen = () => {
   const onPhoneNumChange = (text: string) => {
     setPhoneNumber(text);
   };
+
+  const onPasswordChange = (text: string) => {
+    setPassword(text);
+  };
+  const onShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const onSubmit = async () => {
     const fullNumber = countryCode + phoneNumber;
     try {
@@ -39,8 +49,8 @@ const LoginScreen = () => {
         phoneNumber: fullNumber,
         password,
       });
-      console.log(user);
-      console.log(user);
+
+      dispatch(loginActionUser(user));
     } catch (error) {}
   };
   return (
@@ -78,8 +88,18 @@ const LoginScreen = () => {
               style={styles.input}
               placeholder="Password"
               value={password}
-              onChangeText={setPassword}
+              onChangeText={onPasswordChange}
             />
+            <Pressable
+              onPress={onShowPassword}
+              style={{ position: "absolute", right: 35, top: 20 }}
+            >
+              {showPassword ? (
+                <Ionicons name="eye" size={24} color={Colors.gray} />
+              ) : (
+                <Ionicons name="eye-off" size={24} color={Colors.gray} />
+              )}
+            </Pressable>
           </View>
         </View>
         <View style={{ marginBottom: 20 }}>
