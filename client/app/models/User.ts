@@ -1,6 +1,7 @@
 export interface User {
-  user: any;
   _id?: string;
+  firstname?: string;
+  lastname?: string;
   password: string;
   phoneNumber: string;
   isVerified: boolean;

@@ -11,7 +11,9 @@ interface RoundButtonProps {
 const RoundButton: FC<RoundButtonProps> = ({ icon, text, onPress }) => {
   return (
     <Pressable onPress={onPress}>
-      <Ionicons name={icon as any} size={40} color={Colors.primary} />
+      <View style={styles.circle}>
+        <Ionicons name={icon as any} size={25} color={Colors.dark} />
+      </View>
       <Text style={styles.text}>{text}</Text>
     </Pressable>
   );
@@ -19,4 +21,12 @@ const RoundButton: FC<RoundButtonProps> = ({ icon, text, onPress }) => {
 export default RoundButton;
 const styles = StyleSheet.create({
   text: { color: Colors.dark, fontSize: 16, fontWeight: "500" },
+  circle: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: Colors.lightGray,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

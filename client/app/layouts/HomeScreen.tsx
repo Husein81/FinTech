@@ -19,6 +19,8 @@ import RoundButton from "@/components/RoundButton";
 import { RootState } from "../redux/store";
 import Transactions from "@/components/Home/Transactions";
 import Widgets from "@/components/Home/Widgets";
+import Dropdown from "@/components/Dropdown";
+
 const HomeScreen = () => {
   const balance = useSelector(selectBalance);
   const dispatch = useDispatch();
@@ -58,10 +60,10 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.actionRow}>
-        <RoundButton icon="add-circle" text="Top Up" onPress={onAddMoney} />
-        <RoundButton icon="refresh-circle" text="Transfer" onPress={onClear} />
-        <RoundButton icon={"list-circle"} text="Details" onPress={() => {}} />
-        {/* <Dropdown */}
+        <RoundButton icon="add" text="Top Up" onPress={onAddMoney} />
+        <RoundButton icon="refresh" text="Transfer" onPress={onClear} />
+        <RoundButton icon={"list"} text="Details" onPress={() => {}} />
+        <Dropdown />
       </View>
       <Text style={[defaultStyles.sectionHeader]}>Transactions</Text>
       <Transactions transactions={transactions} />
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-end",
     gap: 10,
+    paddingTop: 20,
   },
   balance: {
     fontSize: 50,

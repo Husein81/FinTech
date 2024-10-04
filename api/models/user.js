@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import bcryptjs from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
   phoneNumber: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   isVerified: { type: Boolean, default: false },

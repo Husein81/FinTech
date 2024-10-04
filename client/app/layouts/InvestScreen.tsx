@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 const InvestScreen = () => {
   return (
-    <View>
-      <Text>InvestScree</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>InvestScreen</Text>
     </View>
   );
 };

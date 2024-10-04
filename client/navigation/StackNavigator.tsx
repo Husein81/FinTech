@@ -17,12 +17,15 @@ import { useEffect } from "react";
 import { loadUser } from "@/app/redux/slice/authSlice";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/app/theme/Colors";
+import Header from "@/components/Header";
+import ProfileScreen from "@/app/layouts/ProfileScreen";
+import CryptoDetailScreen from "@/app/layouts/CryptoDetailScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
   const { user } = useSelector((state: RootState) => state.auth);
-
+  console.log(user);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser() as any);
@@ -34,7 +37,8 @@ const StackNavigator = () => {
         screenOptions={{
           tabBarActiveTintColor: Colors.primary,
           tabBarStyle: {
-            height: 60,
+            height: 70,
+            paddingBottom: 10,
             borderTopRightRadius: 25,
             borderTopLeftRadius: 25,
             shadowOffset: { width: 0, height: 2 },
@@ -49,7 +53,8 @@ const StackNavigator = () => {
             tabBarIcon: ({ color, focused }) => (
               <Ionicons name="home" size={30} color={color} />
             ),
-            headerShown: false,
+            header: () => <Header />,
+            headerTransparent: true,
           }}
           component={HomeScreen}
         />
@@ -60,7 +65,8 @@ const StackNavigator = () => {
               <Ionicons name="trending-up" size={30} color={color} />
             ),
 
-            headerShown: false,
+            header: () => <Header />,
+            headerTransparent: true,
           }}
           component={InvestScreen}
         />
@@ -70,7 +76,8 @@ const StackNavigator = () => {
             tabBarIcon: ({ color }) => (
               <Ionicons name="swap-horizontal" size={30} color={color} />
             ),
-            headerShown: false,
+            header: () => <Header />,
+            headerTransparent: true,
           }}
           component={TransfersScreen}
         />
@@ -80,7 +87,8 @@ const StackNavigator = () => {
             tabBarIcon: ({ color }) => (
               <Ionicons name="logo-bitcoin" size={30} color={color} />
             ),
-            headerShown: false,
+            header: () => <Header />,
+            headerTransparent: true,
           }}
           component={CryptoScreen}
         />
@@ -90,7 +98,8 @@ const StackNavigator = () => {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="heart" size={size} color={color} />
             ),
-            headerShown: false,
+            header: () => <Header />,
+            headerTransparent: true,
           }}
           component={LifeStyleScreen}
         />
@@ -120,6 +129,8 @@ const StackNavigator = () => {
           name="Main"
           component={BottomTab}
         />
+        <Stack.Screen name="CryptoDetail" component={CryptoDetailScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     );
   };

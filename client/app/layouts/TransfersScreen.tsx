@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 const TransfersScreen = () => {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>TransfersScreen</Text>
     </View>
   );
